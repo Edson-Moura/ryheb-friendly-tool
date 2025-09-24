@@ -77,61 +77,23 @@ export const useUsers = () => {
     try {
       setLoading(true);
 
-      // 1. Criar usuário no auth
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: userData.email,
-        password: userData.password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/`,
-          data: {
-            full_name: userData.full_name,
-            phone: userData.phone || null
-          }
+      // Chamar Edge Function para criar usuário
+      const { data, error } = await supabase.functions.invoke('create-user', {
+        body: {
+          email: userData.email,
+          password: userData.password,
+          full_name: userData.full_name,
+          phone: userData.phone || null,
+          role: userData.role
         }
       });
 
-      if (authError) {
-        throw authError;
+      if (error) {
+        throw error;
       }
 
-      if (!authData.user) {
-        throw new Error('Usuário não foi criado corretamente');
-      }
-
-      // 2. Criar perfil
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          user_id: authData.user.id,
-          full_name: userData.full_name,
-          phone: userData.phone || null
-        });
-
-      if (profileError) {
-        console.warn('Erro ao criar perfil:', profileError);
-      }
-
-      // 3. Atribuir role se especificada
-      if (userData.role) {
-        // Buscar um restaurante para associar o usuário (pode ser melhorado)
-        const { data: restaurants } = await supabase
-          .from('restaurants')
-          .select('id')
-          .limit(1);
-
-        if (restaurants && restaurants.length > 0) {
-          const { error: roleError } = await supabase
-            .from('restaurant_members')
-            .insert({
-              user_id: authData.user.id,
-              restaurant_id: restaurants[0].id,
-              role: userData.role
-            });
-
-          if (roleError) {
-            console.warn('Erro ao atribuir role:', roleError);
-          }
-        }
+      if (data.error) {
+        throw new Error(data.error);
       }
 
       // Atualizar lista de usuários
