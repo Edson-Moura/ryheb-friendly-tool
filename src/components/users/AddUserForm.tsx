@@ -181,7 +181,7 @@ export const AddUserForm = () => {
                     <SelectItem value="manager">Gerente - Gestão de operações</SelectItem>
                     <SelectItem value="chef">Chef - Gestão de cardápio e cozinha</SelectItem>
                     <SelectItem value="inventory">Estoque - Gestão de inventário</SelectItem>
-                    <SelectItem value="waiter">Garçom - Operações básicas</SelectItem>
+                    <SelectItem value="staff">Garçom - Operações básicas</SelectItem>
                   </SelectContent>
                 </Select>
                 <p className="text-xs text-muted-foreground">
