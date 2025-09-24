@@ -66,7 +66,7 @@ const Index = () => {
               <ChefHat className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
               <div className="hidden sm:block">
                 <h1 className="text-xl sm:text-2xl font-bold text-primary">
-                  {currentRestaurant?.name || 'RestaurantApp'}
+                  {currentRestaurant?.name || 'FoodFlow'}
                 </h1>
                 <p className="text-sm text-muted-foreground">Sistema de Gestão</p>
               </div>

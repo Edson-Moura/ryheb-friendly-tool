@@ -114,7 +114,7 @@ const Landing = () => {
       name: "Maria Silva",
       role: "Proprietária",
       restaurant: "Cantina da Maria",
-      content: "Desde que implementamos o RestaurantApp, conseguimos reduzir o desperdício em 40% e nossos custos ficaram muito mais previsíveis. A gestão de estoque é fantástica!",
+      content: "Desde que implementamos o FoodFlow, conseguimos reduzir o desperdício em 40% e nossos custos ficaram muito mais previsíveis. A gestão de estoque é fantástica!",
       rating: 5
     },
     {
@@ -147,7 +147,7 @@ const Landing = () => {
         <div className="container-mobile mx-auto py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <ChefHat className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-primary">RestaurantApp</span>
+            <span className="text-xl font-bold text-primary">FoodFlow</span>
           </div>
           <Button variant="outline" onClick={() => navigate('/auth')}>
             Entrar
@@ -163,14 +163,14 @@ const Landing = () => {
             Sistema #1 em gestão de restaurantes
           </Badge>
           
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-3xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
             Transforme seu
             <span className="text-primary block">Restaurante</span>
             em um negócio
             <span className="text-primary">inteligente</span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Gerencie estoque, cardápio, equipe e finanças em uma única plataforma. 
             Reduza custos, aumente a eficiência e tome decisões baseadas em dados.
           </p>
@@ -244,7 +244,7 @@ const Landing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Por que escolher o RestaurantApp?
+                Por que escolher o FoodFlow?
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -388,7 +388,7 @@ const Landing = () => {
               O que nossos clientes dizem
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Mais de 10.000 restaurantes confiam no RestaurantApp para otimizar sua gestão
+              Mais de 10.000 restaurantes confiam no FoodFlow para otimizar sua gestão
             </p>
           </div>
 
@@ -431,7 +431,7 @@ const Landing = () => {
             Pronto para revolucionar seu restaurante?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Junte-se a mais de 10.000 restaurantes que já transformaram sua gestão com o RestaurantApp.
+            Junte-se a mais de 10.000 restaurantes que já transformaram sua gestão com o FoodFlow.
           </p>
           <Button 
             size="lg" 

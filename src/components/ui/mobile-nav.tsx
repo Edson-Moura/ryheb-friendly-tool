@@ -101,7 +101,7 @@ const MobileNav = () => {
             <ChefHat className="h-8 w-8 text-primary" />
             <div>
               <SheetTitle className="text-lg">
-                {currentRestaurant?.name || 'RestaurantApp'}
+                {currentRestaurant?.name || 'FoodFlow'}
               </SheetTitle>
               <p className="text-sm text-muted-foreground">Sistema de Gestão</p>
             </div>
