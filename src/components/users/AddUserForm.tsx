@@ -40,7 +40,9 @@ export const AddUserForm = () => {
 
     setLoading(true);
     try {
+      console.log('Tentando criar usuário:', formData);
       await createUser(formData);
+      console.log('Usuário criado com sucesso');
       toast({
         title: "Usuário criado",
         description: "O usuário foi criado com sucesso.",
@@ -55,6 +57,7 @@ export const AddUserForm = () => {
         role: ''
       });
     } catch (error: any) {
+      console.error('Erro completo ao criar usuário:', error);
       toast({
         title: "Erro",
         description: error.message || "Erro ao criar usuário.",

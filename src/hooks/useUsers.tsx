@@ -30,34 +30,43 @@ export const useUsers = () => {
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
-      // Buscar profiles com informações dos usuários
-      const { data: profiles, error: profilesError } = await supabase
-        .from('profiles')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (profilesError) {
-        throw profilesError;
-      }
-
-      // Buscar membros dos restaurantes para obter roles
+      // Primeiro, buscar todos os membros de restaurante com informações do usuário
       const { data: members, error: membersError } = await supabase
         .from('restaurant_members')
-        .select('user_id, role');
+        .select('user_id, role, created_at');
 
       if (membersError) {
-        console.warn('Erro ao buscar roles:', membersError);
+        throw membersError;
       }
 
-      // Combinar dados de profiles com roles
-      const usersWithRoles = profiles?.map(profile => {
-        const memberData = members?.find(member => member.user_id === profile.user_id);
+      if (!members || members.length === 0) {
+        setUsers([]);
+        return;
+      }
+
+      // Buscar profiles para cada usuário
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('*');
+
+      if (profilesError) {
+        console.warn('Erro ao buscar profiles:', profilesError);
+      }
+
+      // Combinar dados de members com profiles
+      const usersWithRoles = members.map(member => {
+        const profile = profiles?.find(p => p.user_id === member.user_id);
         return {
-          ...profile,
-          role: memberData?.role || null,
-          email: null // Será preenchido na próxima etapa se necessário
+          user_id: member.user_id,
+          full_name: profile?.full_name || null,
+          email: null, // Será preenchido se necessário
+          phone: profile?.phone || null,
+          avatar_url: profile?.avatar_url || null,
+          role: member.role,
+          created_at: member.created_at,
+          updated_at: profile?.updated_at || member.created_at
         };
-      }) || [];
+      });
 
       setUsers(usersWithRoles);
     } catch (error: any) {
@@ -76,8 +85,10 @@ export const useUsers = () => {
   const createUser = useCallback(async (userData: CreateUserData) => {
     try {
       setLoading(true);
+      console.log('Iniciando criação de usuário:', userData);
 
       // Chamar Edge Function para criar usuário
+      console.log('Chamando edge function create-user...');
       const { data, error } = await supabase.functions.invoke('create-user', {
         body: {
           email: userData.email,
@@ -88,14 +99,19 @@ export const useUsers = () => {
         }
       });
 
+      console.log('Resposta da edge function:', { data, error });
+
       if (error) {
+        console.error('Erro na chamada da edge function:', error);
         throw error;
       }
 
-      if (data.error) {
+      if (data?.error) {
+        console.error('Erro retornado pela edge function:', data.error);
         throw new Error(data.error);
       }
 
+      console.log('Usuário criado com sucesso, atualizando lista...');
       // Atualizar lista de usuários
       await fetchUsers();
 
