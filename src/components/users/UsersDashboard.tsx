@@ -20,22 +20,26 @@ export const UsersDashboard = () => {
 
       {/* Main Content */}
       <Tabs defaultValue="users" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="users" className="flex items-center gap-2">
-            <Users className="h-4 w-4" />
-            Usuários
+        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto p-1">
+          <TabsTrigger value="users" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 text-xs sm:text-sm">
+            <Users className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Usuários</span>
+            <span className="sm:hidden">Users</span>
           </TabsTrigger>
-          <TabsTrigger value="add-user" className="flex items-center gap-2">
-            <UserPlus className="h-4 w-4" />
-            Adicionar Usuário
+          <TabsTrigger value="add-user" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 text-xs sm:text-sm">
+            <UserPlus className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Adicionar Usuário</span>
+            <span className="sm:hidden">Adicionar</span>
           </TabsTrigger>
-          <TabsTrigger value="roles" className="flex items-center gap-2">
-            <Settings className="h-4 w-4" />
-            Funções
+          <TabsTrigger value="roles" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 text-xs sm:text-sm">
+            <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Funções</span>
+            <span className="sm:hidden">Roles</span>
           </TabsTrigger>
-          <TabsTrigger value="permissions" className="flex items-center gap-2">
-            <Shield className="h-4 w-4" />
-            Permissões
+          <TabsTrigger value="permissions" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 text-xs sm:text-sm">
+            <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Permissões</span>
+            <span className="sm:hidden">Perms</span>
           </TabsTrigger>
         </TabsList>
 
